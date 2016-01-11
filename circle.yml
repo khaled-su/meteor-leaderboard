@@ -9,8 +9,8 @@ test:
   override:
     - gagarin -v
 
-deployment:
-  production:
-    branch: "master"
-    commands:
-      - printf "<Meteor username>\n<Meteor password>\n" | meteor deploy circlecivelocity.meteor.com
+#deployment:
+#  production:
+#    branch: "master"
+#    commands:
+#      - printf "<Meteor username>\n<Meteor password>\n" | meteor deploy circlecivelocity.meteor.com
