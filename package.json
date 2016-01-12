@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "chimp": "^0.24.1",
+    "gagarin": "^0.4.12"
+  }
+}

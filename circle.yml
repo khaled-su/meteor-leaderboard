@@ -1,3 +1,9 @@
+machine:
+  java:
+    version: oraclejdk8
+  node:
+    version: 5.2.0
+
 dependencies:
   cache_directories:
     - "node_modules"
@@ -24,13 +30,16 @@ dependencies:
     - if [ ! -e $HOME/.meteor/meteor ]; then curl https://install.meteor.com | sh; fi
 
     # Cache npm deps
-    - npm install -g chimp
-    - npm install -g gagarin
+    - npm install
+
+    # Cache Selenium & ChromeDriver
+    - ./node_modules/.bin/chimp --path=content # there are no tests in content
+
 
 test:
   override:
-    - gagarin -v
-    - chimp --mocha
+    - ./node_modules/.bin/gagarin -v
+    - ./node_modules/.bin/chimp --mocha --path=tests/chimp
 
 #deployment:
 #  production:
