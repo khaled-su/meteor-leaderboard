@@ -1,4 +1,9 @@
 {
+  "private": true,
+  "scripts": {
+    "start": ".scripts/start.js",
+    "test": ".scripts/test.js"
+  },
   "devDependencies": {
     "chimp": "^0.24.1",
     "gagarin": "^0.4.12"
