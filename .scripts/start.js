@@ -9,31 +9,30 @@ var baseDir = path.resolve(__dirname, '..'),
    chimpBin = path.resolve(baseDir, 'node_modules/.bin/chimp');
 
 var appOptions = {
-  settings: 'settings.json',
   port: 3000,
   env: {
     ROOT_URL: 'http://localhost:3000/'
-  }
+  },
+  waitForMessage: 'App running at'
 };
 
 var chimpSwitches =
+    '--ddp=' + appOptions.env.ROOT_URL +
     ' --path=' + path.resolve('tests/chimp') +
     ' --mocha';
 
-if (process.env.CI || process.env.TRAVIS || process.env.CIRCLECI) {
-  // when not in Watch mode, Chimp existing will exit Meteor too
-  // we also don't need Velocity for the app chimp will run against
-  appOptions.env.VELOCITY = 0;
-} else {
+if (!(process.env.CI || process.env.TRAVIS || process.env.CIRCLECI)) {
   chimpSwitches += ' --watch';
 }
 
-startChimp('--ddp=' + appOptions.env.ROOT_URL + chimpSwitches);
+startApp(function () {
+  startChimp(chimpSwitches);
+});
 
 function startApp(callback) {
   startProcess({
     name: 'Meteor App',
-    command: 'meteor --settings ' + appOptions.settings + ' --port ' + appOptions.port,
+    command: 'meteor --port ' + appOptions.port,
     waitForMessage: appOptions.waitForMessage,
     options: {
       env: extend(appOptions.env, process.env)
