@@ -37,8 +37,9 @@ dependencies:
 
 test:
   override:
-    - ./node_modules/.bin/gagarin -v
-    - ./node_modules/.bin/chimp --mocha --path=tests/chimp
+    - npm test:
+        environment:
+          MONGO_URL: "mongodb://localhost:27017/meteor"
 
 #deployment:
 #  production:
