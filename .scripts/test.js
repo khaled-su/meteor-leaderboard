@@ -3,14 +3,26 @@ var path = require('path'),
    extend = require('util')._extend,
    exec = require('child_process').exec;
 
-var chimpScript = path.resolve(__dirname, 'start.js');
+var baseDir = path.resolve(__dirname, '..'),
+    chimpScript = path.resolve(__dirname, 'start.js'),
+    gagarinBin = path.resolve(baseDir, 'node_modules/.bin/gagarin');
 
 runTests();
 
 function runTests() {
-  runChimp(function () {
-    console.log('Yay!');
+  runGagarin(function () {
+    runChimp(function () {
+      console.log('Yay!');
+    });
   });
+}
+
+function runGagarin(callback) {
+  startProcess({
+    name: 'Gagarin',
+    options: {},
+    command: gagarinBin + ' -v'
+  }, callback);
 }
 
 function runChimp(callback) {

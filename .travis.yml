@@ -14,7 +14,6 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
-  firefox: "latest"
 
 cache:
   directories:
@@ -44,13 +43,10 @@ before_install:
   - export PATH=$MONGO_HOME/bin:$PATH
   - mkdir -p $HOME/data/db
   - $MONGO_HOME/bin/mongod --dbpath $HOME/data/db > $HOME/mongo.log 2>&1 &
-  - cd $HOME/build/xolvio/automated-testing-best-practices
+  - cd $HOME/build/khaledabbas/meteor-leaderboard
 
   # Install NPM dependencies
   - npm install
-
-  # Cache Velocity Meteor Release
-  - .scripts/cache-velocity.js
 
   # Cache Selenium & ChromeDriver
   - ./node_modules/.bin/chimp --path=content # there are no tests in content
